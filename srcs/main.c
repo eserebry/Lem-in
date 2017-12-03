@@ -37,7 +37,7 @@ int		main(int argc, char **argv)
 	lemin = init_struct(argc);
 	if (argc != 2 || (ft_strcmp(argv[1], "-c")) != 0)
 	{
-		ft_printf("{STC:RD}lem-in usage: ./lem_in [-c] < [map]\n" NONE);
+		ft_printf("{STC:RD}lem_in usage: ./lem_in [-c] < [map]\n" NONE);
 		exit(1);
 	}
 	if (!get_input(lemin))
