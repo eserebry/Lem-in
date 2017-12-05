@@ -32,17 +32,17 @@ void	print_output(int ant, char *room)
 }
 
 /*
-**printing out ants while solution path exist
+**printing out ants while solution path exist, returns number of ants
 */
 
 int		move_the_ants(t_room *start)
 {
 	t_room	*tmp;
 	int		count;
-	int		end_ants_num;
+	int		ants_num;
 
 	tmp = get_end(start);
-	end_ants_num = tmp->ants_num;
+	ants_num = tmp->ants_num;
 	count = tmp->ants_num;
 	while (tmp->prev)
 	{
@@ -56,7 +56,7 @@ int		move_the_ants(t_room *start)
 		tmp = tmp->prev;
 	}
 	ft_putchar('\n');
-	return (end_ants_num);
+	return (ants_num);
 }
 
 void	solve(t_lemin *lemin)

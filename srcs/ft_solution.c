@@ -40,6 +40,10 @@ t_room	*rooms_search(t_room *rooms, int pos)
 	return (NULL);
 }
 
+/*
+**looking for a posiible solition path
+*/
+
 void	create_solution_path(t_lemin *lemin, t_room *rooms)
 {
 	t_room	*tmp;

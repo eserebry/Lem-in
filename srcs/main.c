@@ -22,8 +22,8 @@ t_lemin	*init_struct(int argc)
 	new->links_num = 0;
 	new->rooms = NULL;
 	new->links = NULL;
-	new->start_on = 0;
-	new->end_on = 0;
+	new->check_start = 0;
+	new->check_end = 0;
 	new->tmp = NULL;
 	new->input = NULL;
 	return (new);
@@ -37,12 +37,12 @@ int		main(int argc, char **argv)
 	lemin = init_struct(argc);
 	if (argc != 2 || (ft_strcmp(argv[1], "-c")) != 0)
 	{
-		ft_printf("{STC:RD}lem_in usage: ./lem_in [-c] < [map]\n" NONE);
+		ft_printf("{STC:RD}lem_in usage: ./lem_in [-c] < [map]\n" NN);
 		exit(1);
 	}
 	if (!get_input(lemin))
 	{
-		ft_printf("{STC:RD}Error\n" NONE);
+		ft_printf("{STC:RD}{SET:RB}ERROR\n" NN);
 		free_all(lemin);
 		return (0);
 	}

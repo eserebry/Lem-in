@@ -12,6 +12,10 @@
 
 #include "../includes/lem_in.h"
 
+/*
+**checking if ants are represented by number
+*/
+
 int		check_ants(char *str)
 {
 	int x;
@@ -24,6 +28,10 @@ int		check_ants(char *str)
 	}
 	return (1);
 }
+
+/*
+**getting number of ants
+*/ 
 
 int		get_ants(t_lemin *lemin, char *line)
 {

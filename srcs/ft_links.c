@@ -38,7 +38,7 @@ int		check_for_links(char *line)
 ** allocating memory for links
 */
 
-t_link	*new(t_lemin *lemin, t_link *tmp)
+t_link	*new_link(t_lemin *lemin, t_link *tmp)
 {
 	if (!lemin->links)
 	{
@@ -60,14 +60,14 @@ t_link	*new(t_lemin *lemin, t_link *tmp)
 ** adding a link
 */
 
-void	add_link(t_lemin *lemin, char *line)
+void	parse_link(t_lemin *lemin, char *line)
 {
 	t_link	*tmp;
 	int		x;
 	int		y;
 
 	tmp = NULL;
-	tmp = new(lemin, tmp);
+	tmp = new_link(lemin, tmp);
 	x = -1;
 	while (line[++x] != '-')
 		;
@@ -79,11 +79,11 @@ void	add_link(t_lemin *lemin, char *line)
 	tmp->next = NULL;
 }
 
-int		get_links(t_lemin *lemin, char *line)
+int		add_links(t_lemin *lemin, char *line)
 {
 	if (!check_for_links(line))
 		return (0);
-	add_link(lemin, line);
+	parse_link(lemin, line);
 	lemin->links_num++;
 	return (1);
 }

@@ -12,7 +12,7 @@
 
 #include "../includes/lem_in.h"
 
-void	init_room(t_lemin *lemin, char *line, int x)
+void	first_room_init(t_lemin *lemin, char *line, int x)
 {
 	lemin->rooms = (t_room *)ft_memalloc(sizeof(t_room));
 	lemin->rooms->next = NULL;
@@ -23,19 +23,19 @@ void	init_room(t_lemin *lemin, char *line, int x)
 	lemin->rooms->path = 0;
 	lemin->rooms->pos = -1;
 	lemin->rooms->ants_num = 0;
-	if (lemin->start_on == 1)
+	if (lemin->check_start == 1)
 	{
 		lemin->rooms->start = 1;
-		lemin->start_on = 0;
+		lemin->check_start = 0;
 	}
-	if (lemin->end_on == 1)
+	if (lemin->check_end == 1)
 	{
 		lemin->rooms->end = 1;
-		lemin->end_on = 0;
+		lemin->check_end = 0;
 	}
 }
 
-void	init_next_room(t_lemin *lemin, char *line, int x)
+void	next_room_init(t_lemin *lemin, char *line, int x)
 {
 	t_room *tmp;
 
@@ -51,19 +51,19 @@ void	init_next_room(t_lemin *lemin, char *line, int x)
 	tmp->next->path = 0;
 	tmp->next->pos = -1;
 	tmp->next->ants_num = 0;
-	if (lemin->start_on == 1)
+	if (lemin->check_start == 1)
 	{
 		tmp->next->start = 1;
-		lemin->start_on = 0;
+		lemin->check_start = 0;
 	}
-	if (lemin->end_on == 1)
+	if (lemin->check_end == 1)
 	{
 		tmp->next->end = 1;
-		lemin->end_on = 0;
+		lemin->check_end = 0;
 	}
 }
 
-void	add_room(t_lemin *lemin, char *line)
+void	parce_room(t_lemin *lemin, char *line)
 {
 	int		x;
 
@@ -71,7 +71,30 @@ void	add_room(t_lemin *lemin, char *line)
 	while (line[++x] != ' ')
 		;
 	if (!lemin->rooms)
-		init_room(lemin, line, x);
+		first_room_init(lemin, line, x);
 	else
-		init_next_room(lemin, line, x);
+		next_room_init(lemin, line, x);
+}
+
+/*
+**if line starts with # (comment) or with the L (path) skiping the line
+**if not, and there are to spases - it's a room
+*/
+
+int		check_for_room(char *line)
+{
+	if (line[0] == '#' || line[0] == 'L')
+		return (0);
+	else if ((ft_space(line)) == 2)
+		return (1);
+	return (0);
+}
+
+int		add_rooms(t_lemin *lemin, char *line)
+{
+	if (!check_for_room(line))
+		return (0);
+	parce_room(lemin, line);
+	lemin->rooms_num++;
+	return (1);
 }

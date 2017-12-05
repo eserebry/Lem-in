@@ -14,19 +14,19 @@
 
 void	display_error(t_lemin *lemin)
 {
-	ft_printf("{STC:GR}Look at what we've got here:\n" NONE);
+	ft_printf("{STC:LG}{SET:UL}{SET:RB}Look at what we've got here:\n" NN);
 	if (lemin->ants_num == 0)
-		ft_printf("{STC:RD}No ants\n" NONE);
+		ft_printf("{STC:RD}{SET:RB}*No ants*\n" NN);
 	else
-		ft_printf("{STC:DG}%d ants\n" NONE, lemin->ants_num);
+		ft_printf("{STC:DG}{SET:UL}{SET:RB}*%d ants*\n" NN, lemin->ants_num);
 	if (lemin->rooms_num == 0)
-		ft_printf("{STC:RD}No rooms\n" NONE);
+		ft_printf("{STC:RD}{SET:RB}*No rooms*\n" NN);
 	else
-		ft_printf("{STC:LB}%d rooms\n" NONE, lemin->rooms_num);
+		ft_printf("{STC:LB}{SET:UL}{SET:RB}*%d rooms*\n" NN, lemin->rooms_num);
 	if (lemin->links_num == 0)
-		ft_printf("{STC:RD}No doors\n" NONE);
+		ft_printf("{STC:RD}{SET:RB}*No doors*\n" NN);
 	else
-		ft_printf("{STC:LY}%d doors\n" NONE, lemin->links_num);
+		ft_printf("{STC:LY}{SET:UL}{SET:RB}*%d doors*\n" NN, lemin->links_num);
 }
 
 /*
@@ -35,63 +35,36 @@ void	display_error(t_lemin *lemin)
 
 int		validate_input(t_lemin *lemin)
 {
-	int check;
+	int		check;
+	t_room	*tmp;
 
 	check = 1;
 	if (check == 1)
 		display_error(lemin);
 	if (lemin->ants_num == 0 || lemin->rooms_num == 0 || lemin->links_num == 0)
 		check = 0;
-	if (!display_rooms(lemin))
+	if (!display_rooms(lemin, tmp))
 		check = 0;
 	if (check == 0)
 		return (0);
 	if (!validate_path(lemin, lemin->rooms))
 	{
 		check = 0;
-		ft_printf("{STC:RD}No, there is no way.\n" NONE);
+		ft_printf("{STC:RD}{SET:UL}{SET:RB}No, there is no way.\n" NN);
 	}
 	else
-		ft_printf("{STC:LR}Yes, there is a way!\n" NONE);
+		ft_printf("{STC:LG}{SET:UL}{SET:RB}Yes, there is a way!\n" NN);
 	return (check);
-}
-
-/*
-**looking for a possible path,  if it's exist
-*/
-
-int		validate_path(t_lemin *lemin, t_room *rooms)
-{
-	t_room	*tmp;
-	int		x;
-	int		y;
-
-	tmp = start_search(rooms);
-	y = 0;
-	tmp->checked = 1;
-	tmp->pos = y;
-	tmp->path = 1;
-	if (tmp->doors_num == 0)
-		return (0);
-	x = -1;
-	while (tmp->door_names[++x])
-	{
-		if (searching_path(lemin, tmp->door_names[x], y))
-			return (1);
-	}
-	return (0);
 }
 
 /*
 **validating if exit and start are exist and displpay the result
 */
 
-int		display_rooms(t_lemin *lemin)
+int		display_rooms(t_lemin *lemin, t_room *tmp)
 {
-	int		count;
 	int		start;
 	int		end;
-	t_room	*tmp;
 
 	tmp = lemin->rooms;
 	start = 0;
@@ -106,10 +79,12 @@ int		display_rooms(t_lemin *lemin)
 	}
 	if (start == 1 && end == 1)
 	{
-		ft_printf("{STC:LG}##start and ##end are exist\n" NONE);
+		ft_printf("{STC:GR}##start is exist\n{STC:BU}##end is exist\n" NN);
 		return (1);
 	}
-	else
-		ft_printf("{STC:RD}Missing start and/or end \n" NONE);
+	else if (start == 0 && end == 1)
+		ft_printf("{STC:BU}##end is exist\n"NN"{STC:RD}##start is missing\n"NN);
+	else if (start == 1 && end == 0)
+		ft_printf("{STC:BU}##start is exist\n"NN"{STC:RD}Missing ##end \n" NN);
 	return (0);
 }
