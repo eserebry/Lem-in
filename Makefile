@@ -5,49 +5,64 @@
 #                                                     +:+ +:+         +:+      #
 #    By: eserebry <eserebry@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/04/11 21:47:23 by eserebry          #+#    #+#              #
-#    Updated: 2017/11/24 06:01:41 by eserebry         ###   ########.fr        #
+#    Created: 2017/11/06 22:47:44 by eserebry          #+#    #+#              #
+#    Updated: 2017/11/26 01:56:34 by eserebry         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+NAME = lem_in
 
-FLAGS = -Wall -Wextra -Werror -c -I -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -Ofast
+CC = gcc
 
-INCLUDES =	"includes"
+SRC =	main.c \
+		display_management.c \
+		ft_free.c \
+		ft_solve.c \
+		ft_ants.c \
+		ft_doors.c \
+		ft_input.c \
+		ft_links.c \
+		ft_path.c \
+		ft_rooms.c \
+		ft_solution.c \
 
-FUNCTION = atoi bzero isdigit isprint memalloc memdel memcmp memcpy memmove \
-memset strchr strdel strdup strjoin strlen strclen strsub strnew strcat \
-strncat strcpy strsplit strstr strcpy_int strjoin_free get_next_line putendl \
-putchar putnbr putstr strcmp space\
+LIBFT = libft/libft.a
+FT_PRINTF = libft/ft_printf/libftprintf.a
 
-FT_FUNCTION = $(addprefix ft_, $(FUNCTION))
-SRC = $(addsuffix .c, $(FT_FUNCTION))
+OBJ = $(SRCS:.c=.o)
 
-OBJ = $(SRC:.c=.o)
+SRCDIR = srcs
+OBJDIR = objs
 
-RM = rm -f
+SRCS = $(addprefix $(SRCDIR)/, $(SRC))
+OBJS = $(addprefix $(OBJDIR)/, $(OBJ))
+
+HEADER = lem_in.h
+
+RM = rm -rf
 
 GREEN = \033[32m
 RED = \033[31m
 
-all: $(NAME)
+all : $(NAME)
 
-$(NAME): 
-		@gcc $(FLAGS) $(SRC)
-		@ar rc $(NAME) $(OBJ)
-		@ranlib $(NAME)
-		@echo "$(GREEN)libft: creating object files"
-
-
-$(COMPILED): @%.o: %.c
-		@$(CC) $(FLAGS) $< -o $@ -I $(INCLUDES)
+$(NAME): $(OBJ)
+	@make re -C libft
+	@make -C libft/ft_printf
+	@$(CC) -o $(NAME) $(SRCS) $(FLAG) $(LIBFT) $(FT_PRINTF)
+	@echo "$(GREEN)lem_in: creating object files"
 
 clean:
-		@/bin/$(RM) $(OBJ)
+	@/bin/$(RM) $(OBJ)
+	@make -C libft clean
+	@make -C libft/ft_printf clean
 
 fclean: clean
-		@/bin/$(RM) $(NAME)
+	@make -C libft clean
+	@make -C libft/ft_printf clean
+	@/bin/$(RM) $(NAME)
+	@echo "$(RED)lem_in: deleting object files"
 
 re: fclean all
 
