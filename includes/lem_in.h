@@ -44,8 +44,8 @@ typedef struct		s_lemin
 	int				ants_num;
 	int				rooms_num;
 	int				links_num;
-	int				start_on;
-	int				end_on;
+	int				check_start;
+	int				check_end;
 	struct s_room	*rooms;
 	struct s_link	*links;
 	struct s_room	*way;
@@ -60,15 +60,17 @@ void				add_doors(t_lemin *lemin);
 /*
 ** ft_links
 */
-int					get_links(t_lemin *lemin, char *line);
+int					add_links(t_lemin *lemin, char *line);
 /*
 ** ft_rooms
 */
-void				add_room(t_lemin *lemin, char *line);
+void				parse_room(t_lemin *lemin, char *line);
+int					add_rooms(t_lemin *lemin, char *line);
 /*
 ** ft_recursion
 */
 int					searching_path(t_lemin *lemin, char *door_name, int y);
+int					validate_path(t_lemin *lemin, t_room *rooms);
 /*
 ** ft_solution
 */
@@ -79,9 +81,9 @@ void				create_solution_path(t_lemin *lemin, t_room *rooms);
 */
 int					validate_input(t_lemin *lemin);
 int					validate_path(t_lemin *lemin, t_room *rooms);
-int					display_rooms(t_lemin *lemin);
+int					display_rooms(t_lemin *lemin, t_room *tmp);
 /*
-** free_all
+** ft_free
 */
 void				free_all(t_lemin *lemin);
 /*
