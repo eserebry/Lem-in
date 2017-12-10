@@ -6,7 +6,7 @@
 /*   By: eserebry <eserebry@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 22:46:08 by eserebry          #+#    #+#             */
-/*   Updated: 2017/11/21 21:33:30 by eserebry         ###   ########.fr       */
+/*   Updated: 2017/12/05 15:57:08 by eserebry         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct		s_list
 
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
+int					ft_dash(char *str);
 int					ft_get_next_line(const int fd, char **line);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);
@@ -48,6 +49,7 @@ void				ft_putchar(char c);
 void				ft_putendl(const char *s);
 void				ft_putnbr(int n);
 void				ft_putstr(const char *s);
+int					ft_space(char *str);
 size_t				ft_strlen(const char *s);
 int					ft_strclen(char *str, char c);
 int					ft_strcmp(const char *s1, const char *s2);
