@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_space.c                                         :+:      :+:    :+:   */
+/*   ft_dash.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eserebry <eserebry@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/28 21:21:45 by eserebry          #+#    #+#             */
-/*   Updated: 2017/12/05 15:54:40 by eserebry         ###   ########.fr       */
+/*   Created: 2017/12/05 15:46:30 by eserebry          #+#    #+#             */
+/*   Updated: 2017/12/05 15:55:11 by eserebry         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-int		ft_space(char *str)
+int		ft_dash(char *str)
 {
-	int	space;
+	int	dash;
 	int	i;
 
-	space = 0;
+	dash = 0;
 	i = -1;
 	while (str[++i])
 	{
-		if (str[i] == ' ')
-			space++;
+		if (str[i] == '-')
+			dash++;
 	}
-	return (space);
+	return (dash);
 }

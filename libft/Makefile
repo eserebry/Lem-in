@@ -6,7 +6,7 @@
 #    By: eserebry <eserebry@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/11 21:47:23 by eserebry          #+#    #+#              #
-#    Updated: 2017/11/24 06:01:41 by eserebry         ###   ########.fr        #
+#    Updated: 2017/12/05 15:49:38 by eserebry         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,10 @@ FLAGS = -Wall -Wextra -Werror -c -I -fsanitize=address
 
 INCLUDES =	"includes"
 
-FUNCTION = atoi bzero isdigit isprint memalloc memdel memcmp memcpy memmove \
+FUNCTION = atoi bzero dash isdigit isprint memalloc memdel memcmp memcpy memmove \
 memset strchr strdel strdup strjoin strlen strclen strsub strnew strcat \
 strncat strcpy strsplit strstr strcpy_int strjoin_free get_next_line putendl \
-putchar putnbr putstr strcmp \
+putchar putnbr putstr strcmp space\
 
 FT_FUNCTION = $(addprefix ft_, $(FUNCTION))
 SRC = $(addsuffix .c, $(FT_FUNCTION))
